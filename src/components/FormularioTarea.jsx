@@ -1,43 +1,38 @@
 import { Form, Button } from "react-bootstrap";
 import ListaTareas from "./ListaTareas";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const FormularioTarea = () => {
-  const [tarea, setTarea] = useState(""); //State para los datos del input o form.control. Tarea es el nombre del State.
-  const [listaTareas, setListaTareas] = useState([]); //Array para almacenar los states tarea. listaTareas el nombre del Array.
+  const [tarea, setTarea] = useState("");
+  const [listaTareas, setListaTareas] = useState([]);
 
-   // Función para cargar los datos del Local Storage al State cuando el componente se monte
+  //Recuperando datos del Local Storage
+  //Hago una doble verificacion de tarea almacenada.
   useEffect(() => {
-    const listaTareasEnLocalStorage = localStorage.getItem(listaTareas);
-    if (listaTareasEnLocalStorage) {
-      setListaTareas(JSON.parse(listaTareasEnLocalStorage));
+    const tareaAlmacenada = JSON.parse(localStorage.getItem("tareas"));
+    if (tareaAlmacenada && tareaAlmacenada.length > 0) {
+      setListaTareas(tareaAlmacenada);
     }
-  }, []);
+  }, []); 
+  // El useEffect de carga solo debe ejecutarse una vez al montar el componente, así que se pasa un array vacío.
 
-  //Almacenando el State en el LocalStorage
+  // Guardar en el LocalStorage cada vez que el array listaTareas cambie.
   useEffect(() => {
-    localStorage.setItem(listaTareas, JSON.stringify(listaTareas));
+    localStorage.setItem("tareas", JSON.stringify(listaTareas));
   }, [listaTareas]);
 
-
-  //Funcion para controlar el evento onSubmit del Form.
   const handleSubmit = (e) => {
-    //para evitar que recargue la pagina por cada evento submit.
     e.preventDefault();
-    //Guardar tarea en el Array de listaTareas
-    //El operador Spred ...  me sirve para conservar los existente en el Array    
     setListaTareas([...listaTareas, tarea]);
-    //Borro el input para una nueva carga mediante setTarea porque el value del Input esta vinculado al State tarea.
     setTarea("");
   };
-  
-  //Creo una funcion para borrar tareas
-  //Invento un parametro tareaBorrar
-    const borrarTarea = (tareaBorrar)=> {
-      let listaTareasFiltrada = listaTareas.filter( (itemTarea)=> itemTarea !== tareaBorrar )
-      setListaTareas(listaTareasFiltrada)
-    };
 
+  const borrarTarea = (tareaBorrar) => {
+    let listaTareasFiltrada = listaTareas.filter(
+      (itemTarea) => itemTarea !== tareaBorrar
+    );
+    setListaTareas(listaTareasFiltrada);
+  };
 
   return (
     <>
@@ -47,16 +42,20 @@ const FormularioTarea = () => {
             type="text"
             placeholder="ingresa una tarea"
             value={tarea}
-            onChange={(e) => setTarea(e.target.value)} //para guardar el value del Input dentro del State
+            onChange={(e) => setTarea(e.target.value)}
           />
           <Button className="ms-2" variant="success" type="submit">
             +
           </Button>
         </Form.Group>
-        <ListaTareas propsListaTareas={listaTareas} borrarTarea={borrarTarea}></ListaTareas>
+        <ListaTareas
+          propsListaTareas={listaTareas}
+          borrarTarea={borrarTarea}
+        ></ListaTareas>
       </form>
     </>
   );
 };
 
 export default FormularioTarea;
+
