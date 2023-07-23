@@ -19,7 +19,7 @@ const App = () => {
 
       <footer className="text-center bg-dark text-light py-4 mt-auto">
         <p>
-          <i>Practica con React - Ejercicio 04</i>
+          <i>Practica con React - Ejercicio 05</i>
         </p>
       </footer>
     </>

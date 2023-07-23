@@ -1,22 +1,36 @@
 import { Form, Button } from "react-bootstrap";
 import ListaTareas from "./ListaTareas";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 const FormularioTarea = () => {
   const [tarea, setTarea] = useState(""); //State para los datos del input o form.control. Tarea es el nombre del State.
   const [listaTareas, setListaTareas] = useState([]); //Array para almacenar los states tarea. listaTareas el nombre del Array.
+
+   // Función para cargar los datos del Local Storage al State cuando el componente se monte
+  useEffect(() => {
+    const listaTareasEnLocalStorage = localStorage.getItem(listaTareas);
+    if (listaTareasEnLocalStorage) {
+      setListaTareas(JSON.parse(listaTareasEnLocalStorage));
+    }
+  }, []);
+
+  //Almacenando el State en el LocalStorage
+  useEffect(() => {
+    localStorage.setItem(listaTareas, JSON.stringify(listaTareas));
+  }, [listaTareas]);
+
+
   //Funcion para controlar el evento onSubmit del Form.
   const handleSubmit = (e) => {
     //para evitar que recargue la pagina por cada evento submit.
     e.preventDefault();
     //Guardar tarea en el Array de listaTareas
-    //El operador Spred ...  me sirve para conservar los existente en el Array
-    
+    //El operador Spred ...  me sirve para conservar los existente en el Array    
     setListaTareas([...listaTareas, tarea]);
     //Borro el input para una nueva carga mediante setTarea porque el value del Input esta vinculado al State tarea.
     setTarea("");
   };
-
+  
   //Creo una funcion para borrar tareas
   //Invento un parametro tareaBorrar
     const borrarTarea = (tareaBorrar)=> {
