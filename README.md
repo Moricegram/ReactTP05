@@ -4,14 +4,13 @@
 
 ![logoreact](https://www.patterns.dev/img/reactjs/react-logo@3x.svg)
 
-## Ejercicio 4
+## Ejercicio 5
 
-> _Crear una aplicación web que muestre una lista de tareas y que al ingresar una tarea en el input, y luego presionar enter, esta tarea se deberá mostrar en una lista como la imagen a continuación:._ > ![imagenEjemplo](https://github.com/Moricegram/ReactTP04/blob/main/ejemplo04.jpg)
+> _Modifica el programa anterior (ReactTP04) para que las tareas se puedan almacenar en el localstorage.:._ > ![imagenEjemplo](https://github.com/Moricegram/ReactTP05/blob/main/ejemplo05.jpg)
 
 ### Propósitos del Ejercicio
 
-- Aprender a renderizar elementos nuevos de una lista mediante el uso de useState
-- Generar la logica necesaria para dar funcionalidad de los botones de un formulario.
+- Almacenar y recuperar datos desde el LocalStorage para utilizarlos en un componente de React.
 
   Enlace a ejercicio desplegado: 🔗
-  [Ejercicio 04](https://gleaming-kangaroo-16a7c2.netlify.app)
+  [Ejercicio 05](https://)
