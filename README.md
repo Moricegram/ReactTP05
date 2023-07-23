@@ -13,4 +13,4 @@
 - Almacenar y recuperar datos desde el LocalStorage para utilizarlos en un componente de React.
 
   Enlace a ejercicio desplegado: 🔗
-  [Ejercicio 05](https://)
+  [Ejercicio 05](benevolent-meringue-0373c6.netlify.app)
